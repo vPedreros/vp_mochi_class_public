@@ -8885,6 +8885,22 @@ int perturbations_print_variables(double tau,
   int idx,index_q, storeidx;
   double *dataptr;
 
+  /************************/
+	/* For use with CONCEPT */
+	/************************/
+	/**
+	 * Compute perturbation derivatives. This also ensures that the
+	 * ppw (and other) structs are up-to-date. This is important
+	 * when using the Runge-Kutta evolver, as this is otherwise
+	 * not taken care off correctly.
+	 */
+	class_call(
+	  perturbations_derivs(tau, y, dy, parameters_and_workspace, error_message),
+	  error_message,  
+	  error_message); 
+    /**************************/
+	/* ^For use with CONCEPT^ */
+	/**************************/
 
   /** - rename structure fields (just to avoid heavy notations) */
 
