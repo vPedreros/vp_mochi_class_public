@@ -87,7 +87,14 @@ int evolver_rk(int (*derivs)(double x,
 
     if (print_variables != NULL) {
 
-      if (x1 == x_ini) {
+      /************************/
+	  /* For use with CONCEPT */
+	  /************************/
+      	/* derivs will be called in print_variables */
+		if (0 == 1) {  /* (x1 == x_ini) { */
+      /**************************/
+	  /* ^For use with CONCEPT^ */
+	  /**************************/
 
 	class_call((*derivs)(x1,
 			     y,
