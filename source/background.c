@@ -2220,6 +2220,18 @@ int background_solve(
 
     pba->background_table[index_loga*pba->bg_size+pba->index_bg_D]*= 1./D_today;
 
+    /************************/
+    /* For use with CONCEPT */
+    /************************/
+    // vp: Normalise higher order growth factors:
+    pba->background_table[index_loga*pba->bg_size+pba->index_bg_D2]*= pow(1./D_today,2);
+    pba->background_table[index_loga*pba->bg_size+pba->index_bg_D3a]*= pow(1./D_today,3);
+    pba->background_table[index_loga*pba->bg_size+pba->index_bg_D3b]*= pow(1./D_today,3);
+    pba->background_table[index_loga*pba->bg_size+pba->index_bg_D3c]*= pow(1./D_today,3);
+    /**************************/
+    /* ^For use with CONCEPT^ */
+    /**************************/
+
     conformal_distance = pba->conformal_age - pba->tau_table[index_loga];
     pba->background_table[index_loga*pba->bg_size+pba->index_bg_conf_distance] = conformal_distance;
 
@@ -3050,7 +3062,7 @@ int background_sources(
   double * bg_table_row;
   // double * bg_table_early_row; // used for wext expansion parametrisation
   double * bg_table_late_row; // used for wext and rho_de expansion parametrisation
-  double H_old, rho_crit_old, rho_tot_old, Omega_m_old, Omega_r_old, f_old;
+  double H_old, rho_crit_old, rho_tot_old, Omega_m_old, Omega_r_old, f_old, f2_old, f3a_old, f3b_old, f3c_old;
 
   pbpaw = parameters_and_workspace;
   pba =  pbpaw->pba;
@@ -3086,6 +3098,17 @@ int background_sources(
         Omega_r_old = bg_table_row[pba->index_bg_Omega_r];
         // double Omega_de_old = bg_table_row[pba->index_bg_Omega_de];
         f_old = bg_table_row[pba->index_bg_f];
+        /************************/
+        /* For use with CONCEPT */
+        /************************/
+        // vp: update f2 considering smg!
+        f2_old = bg_table_row[pba->index_bg_f2];
+        f3a_old = bg_table_row[pba->index_bg_f3a];
+        f3b_old = bg_table_row[pba->index_bg_f3b];
+        f3c_old = bg_table_row[pba->index_bg_f3c];
+        /**************************/
+        /* ^For use with CONCEPT^ */
+        /**************************/
         // Update quantities in background_table depending on rho_smg and p_smg
         class_call(interpolate_rho_smg_p_smg(pba, log(a), log(1/(1.+pba->z_gr_smg)), bg_table_row),
                   pba->error_message,
@@ -3104,6 +3127,17 @@ int background_sources(
         // bg_table_row[pba->index_bg_Omega_de] = Omega_de_old*rho_tot_old/bg_table_row[pba->index_bg_rho_tot];
         bg_table_row[pba->index_bg_Omega_de] = bg_table_row[pba->index_bg_rho_smg]/bg_table_row[pba->index_bg_rho_tot];
         bg_table_row[pba->index_bg_f] = f_old*H_old/bg_table_row[pba->index_bg_H];
+        /************************/
+        /* For use with CONCEPT */
+        /************************/
+        // vp: update f2 considering smg!
+        bg_table_row[pba->index_bg_f2] = f2_old*H_old/bg_table_row[pba->index_bg_H];
+        bg_table_row[pba->index_bg_f3a] = f3a_old*H_old/bg_table_row[pba->index_bg_H];
+        bg_table_row[pba->index_bg_f3b] = f3b_old*H_old/bg_table_row[pba->index_bg_H];
+        bg_table_row[pba->index_bg_f3c] = f3c_old*H_old/bg_table_row[pba->index_bg_H];
+        /**************************/
+        /* ^For use with CONCEPT^ */
+        /**************************/
         // Update relevant quantities in background_table_late depending on rho_smg and p_smg. For late vector transition happens earlier.
         class_call(interpolate_rho_smg_p_smg(pba, 
                                             log(a), 
