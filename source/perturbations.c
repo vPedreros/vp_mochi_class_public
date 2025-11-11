@@ -3452,6 +3452,24 @@ int perturbations_prepare_k_output(struct background * pba,
       class_store_columntitle(ppt->scalar_titles, "delta_rho_fld", pba->has_fld);
       class_store_columntitle(ppt->scalar_titles, "rho_plus_p_theta_fld", pba->has_fld);
       class_store_columntitle(ppt->scalar_titles, "delta_p_fld", pba->has_fld);
+
+      /************************/
+      /* For use with CONCEPT */
+      /************************/
+      /* Include fld in perturbation output */
+      class_store_columntitle(ppt->scalar_titles, "delta_fld", pba->has_fld);
+      class_store_columntitle(ppt->scalar_titles, "theta_fld", pba->has_fld);
+      /**
+       * We choose to store cs2_fld = delta_p_fld/delta_rho_fld rather than
+       * simply delta_p_fld itself, as is done for massive neutrinos.
+       */
+      class_store_columntitle(ppt->scalar_titles, "cs2_fld", pba->has_fld);
+      /* Include theta_tot in perturbation output */
+      class_store_columntitle(ppt->scalar_titles, "theta_tot", _TRUE_);
+      /**************************/
+      /* ^For use with CONCEPT^ */
+      /**************************/
+
       if (pba->has_smg == _TRUE_) {
         class_call(
           perturbations_prepare_k_output_smg(ppt),
