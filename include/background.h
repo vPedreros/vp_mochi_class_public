@@ -449,6 +449,21 @@ struct background
   int index_bg_D;             /**< scale independent growth factor D(a) for CDM perturbations */
   int index_bg_f;             /**< corresponding velocity growth factor [dlnD]/[dln a] */
 
+  /************************/
+  /* For use with CONCEPT */
+  /************************/
+  int index_bg_D2;   /**< second-order growth factor D2(a) */
+  int index_bg_f2;   /**< second-order growth rate f2(a) = [dlnD2]/[dlna] */
+  int index_bg_D3a;  /**< third-order growth factor D3a(a) */
+  int index_bg_f3a;  /**< third-order growth rate f3a(a) = [dlnD3a]/[dlna] */
+  int index_bg_D3b;  /**< third-order growth factor D3b(a) */
+  int index_bg_f3b;  /**< third-order growth rate f3b(a) = [dlnD3b]/[dlna] */
+  int index_bg_D3c;  /**< third-order growth factor D3c(a) */
+  int index_bg_f3c;  /**< third-order growth rate f3c(a) = [dlnD3c]/[dlna] */
+  /**************************/
+  /* ^For use with CONCEPT^ */
+  /**************************/
+
   int index_bg_varc_alpha;    /**< value of fine structure constant in varying fundamental constants */
   int index_bg_varc_me;      /**< value of effective electron mass in varying fundamental constants */
 
