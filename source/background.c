@@ -656,6 +656,24 @@ int background_functions(
     /** - velocity growth factor */
     pvecback[pba->index_bg_f] = pvecback_B[pba->index_bi_D_prime]/( pvecback_B[pba->index_bi_D]*a*pvecback[pba->index_bg_H]);
 
+    /************************/
+    /* For use with CONCEPT */
+    /************************/
+    /*vp*/
+    /* - 2nd order growth factor and velocity growth factor */
+    pvecback[pba->index_bg_D2] = pvecback_B[pba->index_bi_D2];
+    pvecback[pba->index_bg_f2] = pvecback_B[pba->index_bi_D2_prime]/( pvecback_B[pba->index_bi_D2]*a*pvecback[pba->index_bg_H]);
+    /* - 3rd order growth factor and velocity growth factor */
+    pvecback[pba->index_bg_D3a] = pvecback_B[pba->index_bi_D3a];
+    pvecback[pba->index_bg_f3a] = pvecback_B[pba->index_bi_D3a_prime]/( pvecback_B[pba->index_bi_D3a]*a*pvecback[pba->index_bg_H]);
+    pvecback[pba->index_bg_D3b] = pvecback_B[pba->index_bi_D3b];
+    pvecback[pba->index_bg_f3b] = pvecback_B[pba->index_bi_D3b_prime]/( pvecback_B[pba->index_bi_D3b]*a*pvecback[pba->index_bg_H]);
+    pvecback[pba->index_bg_D3c] = pvecback_B[pba->index_bi_D3c];
+    pvecback[pba->index_bg_f3c] = pvecback_B[pba->index_bi_D3c_prime]/( pvecback_B[pba->index_bi_D3c]*a*pvecback[pba->index_bg_H]);
+    /**************************/
+    /* ^For use with CONCEPT^ */
+    /**************************/
+
     /**- Varying fundamental constants */
     if (pba->has_varconst == _TRUE_) {
       class_call(background_varconst_of_z(pba,
@@ -972,6 +990,15 @@ int background_free_input(
     free(pba->M_ncdm);
     free(pba->T_ncdm);
     free(pba->ksi_ncdm);
+
+    /************************/
+    /* For use with CONCEPT */
+    /************************/
+    free(pba->growthfac_contrib_ncdm);
+    /**************************/
+    /* ^For use with CONCEPT^ */
+    /**************************/
+
     free(pba->deg_ncdm);
     free(pba->Omega0_ncdm);
     free(pba->m_ncdm_in_eV);
@@ -1196,6 +1223,23 @@ int background_indices(
   /* -> velocity growth factor in dust universe */
   class_define_index(pba->index_bg_f,_TRUE_,index_bg,1);
 
+  /************************/
+  /* For use with CONCEPT */
+  /************************/
+  /* Second-order growth factor and rate */
+  class_define_index(pba->index_bg_D2, _TRUE_, index_bg, 1);
+  class_define_index(pba->index_bg_f2, _TRUE_, index_bg, 1);
+  /* Third-order growth factors and rates */
+  class_define_index(pba->index_bg_D3a, _TRUE_, index_bg, 1);
+  class_define_index(pba->index_bg_f3a, _TRUE_, index_bg, 1);
+  class_define_index(pba->index_bg_D3b, _TRUE_, index_bg, 1);
+  class_define_index(pba->index_bg_f3b, _TRUE_, index_bg, 1);
+  class_define_index(pba->index_bg_D3c, _TRUE_, index_bg, 1);
+  class_define_index(pba->index_bg_f3c, _TRUE_, index_bg, 1);
+  /**************************/
+  /* ^For use with CONCEPT^ */
+  /**************************/
+
   /* -> varying fundamental constant -- alpha (fine structure) */
   class_define_index(pba->index_bg_varc_alpha,pba->has_varconst,index_bg,1);
 
@@ -1269,6 +1313,22 @@ int background_indices(
   class_define_index(pba->index_bi_D,_TRUE_,index_bi,1);
   class_define_index(pba->index_bi_D_prime,_TRUE_,index_bi,1);
 
+  /************************/
+  /* For use with CONCEPT */
+  /************************/
+  /* -> Second-order equation for second-order growth factor */
+  class_define_index(pba->index_bi_D2, _TRUE_, index_bi, 1);
+  class_define_index(pba->index_bi_D2_prime, _TRUE_, index_bi, 1);
+  /* -> Third-order equations for third-order growth factors */
+  class_define_index(pba->index_bi_D3a, _TRUE_, index_bi, 1);
+  class_define_index(pba->index_bi_D3a_prime, _TRUE_, index_bi, 1);
+  class_define_index(pba->index_bi_D3b, _TRUE_, index_bi, 1);
+  class_define_index(pba->index_bi_D3b_prime, _TRUE_, index_bi, 1);
+  class_define_index(pba->index_bi_D3c, _TRUE_, index_bi, 1);
+  class_define_index(pba->index_bi_D3c_prime, _TRUE_, index_bi, 1);
+  /**************************/
+  /* ^For use with CONCEPT^ */
+  /**************************/
 
   /* -> end of indices in the vector of variables to integrate */
   pba->bi_size = index_bi;
