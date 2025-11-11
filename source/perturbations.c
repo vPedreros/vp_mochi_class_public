@@ -7757,6 +7757,60 @@ int perturbations_total_stress_energy(
     /* add your extra species here */
 
     /* fluid contribution */
+
+    /************************/
+    /* For use with CONCEPT */
+    /************************/
+    /**
+     * Count up total pressure and conformal time derivative of pressure,
+     * excluding the fld species. These are used for the PPF formalism of fld.
+     */
+    double p_tot = 0.;
+    double p_tot_prime = 0.;
+    if (pba->has_fld == _TRUE_ && pba->use_ppf == _TRUE_) {
+      /* Photons */
+      p_tot += 1./3.*ppw->pvecback[pba->index_bg_rho_g];
+      p_tot_prime += -3.*a_prime_over_a*(1. + 1./3.)*1./3.
+        *ppw->pvecback[pba->index_bg_rho_g];
+      /* Baryons have no pressure */
+      /* Ultra relativistic species */
+      if (pba->has_ur == _TRUE_) {
+        p_tot += 1./3.*ppw->pvecback[pba->index_bg_rho_ur];
+        p_tot_prime += -3.*a_prime_over_a*(1. + 1./3.)*1./3.
+          *ppw->pvecback[pba->index_bg_rho_ur];
+      }
+      /* Cold dark matter has no pressure */
+      /* Non-cold dark matter */
+      if (pba->has_ncdm == _TRUE_) {
+        for(n_ncdm = 0; n_ncdm < pba->N_ncdm; n_ncdm++) {
+          p_tot += ppw->pvecback[pba->index_bg_p_ncdm1 + n_ncdm];
+          p_tot_prime += -a_prime_over_a*(5.*ppw->pvecback[pba->index_bg_p_ncdm1 + n_ncdm]
+            - ppw->pvecback[pba->index_bg_pseudo_p_ncdm1 + n_ncdm]);
+        }
+      }
+      /* Decaying cold dark matter has no pressure */
+      /* Decay radiation */
+      if (pba->has_dr == _TRUE_) {
+        p_tot += 1./3.*ppw->pvecback[pba->index_bg_rho_dr];
+        p_tot_prime += -3.*a_prime_over_a*(1. + 1./3.)*1./3.
+          *ppw->pvecback[pba->index_bg_rho_dr]
+          + 1./3.*a*pba->Gamma_dcdm*ppw->pvecback[pba->index_bg_rho_dcdm];
+      }
+      /* Importantly, we skip the dark energy fluid */
+      /* Scalar field */
+      if (pba->has_scf == _TRUE_) {
+        p_tot += ppw->pvecback[pba->index_bg_p_scf];
+        p_tot_prime += -a_prime_over_a/(a*a)*ppw->pvecback[pba->index_bg_phi_prime_scf]
+          *ppw->pvecback[pba->index_bg_phi_prime_scf]
+          - 2./3.*ppw->pvecback[pba->index_bg_dV_scf]
+            *ppw->pvecback[pba->index_bg_phi_prime_scf];
+      }
+      /* Lambda has constant pressure */
+    }
+    /**************************/
+    /* ^For use with CONCEPT^ */
+    /**************************/
+
     if (pba->has_fld == _TRUE_) {
 
       class_call(background_w_fld(pba,a,&w_fld,&dw_over_da_fld,&integral_fld), pba->error_message, ppt->error_message);
