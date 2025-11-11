@@ -136,6 +136,16 @@ cdef extern from "class.h":
         double z_eq
         double tau_eq
 
+        ########################
+        # For use with CONCEPT #
+        ########################
+        int node
+        int num_threads
+        char* message
+        ##########################
+        # ^For use with CONCEPT^ #
+        ##########################
+
     cdef struct thermodynamics:
         short is_allocated
         ErrorMsg error_message

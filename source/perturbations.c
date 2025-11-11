@@ -9270,8 +9270,14 @@ int perturbations_print_variables(double tau,
     }
 
     /* converting synchronous variables to newtonian ones */
-    if ((ppt->gauge == synchronous) && (ppt->get_perturbations_in_current_gauge == _FALSE_)) {
-
+    /************************/
+    /* For use with CONCEPT */
+    /************************/
+    /* Do not convert to Newtonian gauge */
+    if (0 == 1) {  /* (ppt->gauge == synchronous) { */
+    /**************************/
+    /* ^For use with CONCEPT^ */
+    /**************************/
       /* metric perturbations (not only _smg) */
       h_prime = ppw->pvecmetric[ppw->index_mt_h_prime];
       h_prime_prime = ppw->pvecmetric[ppw->index_mt_h_prime_prime];
@@ -9460,6 +9466,16 @@ int perturbations_print_variables(double tau,
     double rho_plus_p_tot = -2./3.*pvecback[pba->index_bg_H_prime]/a + 2./3.*pba->K/(a*a);
     double theta_tot = ppw->rho_plus_p_theta/rho_plus_p_tot;
     class_store_double(dataptr, theta_tot, _TRUE_, storeidx);
+    /**************************/
+    /* ^For use with CONCEPT^ */
+    /**************************/
+
+    /************************/
+    /* For use with CONCEPT */
+    /************************/
+    /* Include h_prime in perturbation output */
+    class_store_double(dataptr, pvecmetric[ppw->index_mt_h_prime],
+      ppt->gauge == synchronous, storeidx);
     /**************************/
     /* ^For use with CONCEPT^ */
     /**************************/

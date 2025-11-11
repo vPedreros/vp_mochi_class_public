@@ -416,6 +416,20 @@ int input_read_from_file(struct file_content * pfc,
   /** -- Special setting of parameter, before anything else: did shooting fail? */
   pba->shooting_failed = _FALSE_;
 
+  /************************/
+  /* For use with CONCEPT */
+  /************************/
+  char * CONCEPT_CLASS_CALL = getenv("CONCEPT_CLASS_CALL");
+  if (CONCEPT_CLASS_CALL == NULL) {
+    pba->node = 0;
+    pba->num_threads = -1;
+    pba->message = (char*)malloc(1*sizeof(char));
+    pba->message[0] = '\0';
+  }
+  /**************************/
+  /* ^For use with CONCEPT^ */
+  /**************************/
+
   /** Find out if shooting necessary and, eventually, shoot and initialize
       read parameters */
   class_call(input_shooting(pfc,ppr,pba,pth,ppt,ptr,ppm,phr,pfo,ple,psd,pop,

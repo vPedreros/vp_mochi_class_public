@@ -333,7 +333,23 @@ cdef class Class:
             "output":"tCl mPk",}
         self.set(**_pars)
 
-    def __cinit__(self, default=False):
+    def __cinit__(self,         default=False, concept_class_call=False, node=0, num_threads=-1, message=''):         # Changed for use with CONCEPT
+
+        ########################
+        # For use with CONCEPT #
+        ########################
+        import os
+        os.environ.pop('CONCEPT_CLASS_CALL', None)
+        if concept_class_call:
+            os.environ['CONCEPT_CLASS_CALL'] = '1'
+        self.ba.node = <int>node
+        self.ba.num_threads = <int>num_threads
+        self.ba.message = <char*>malloc((len(message) + 1)*sizeof(char))
+        strcpy(self.ba.message, message.encode())
+        ##########################
+        # ^For use with CONCEPT^ #
+        ##########################
+        
         cdef char* dumc
         self.allocated = False
         self.computed = False

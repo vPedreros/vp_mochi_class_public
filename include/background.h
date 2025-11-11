@@ -685,6 +685,19 @@ struct background
 
   ErrorMsg error_message; /**< zone for writing error messages */
 
+  /************************/
+  /* For use with CONCEPT */
+  /************************/
+  /**
+   * Used to set number of OpenMP threads and to print
+   * status updates during perturbation computations.
+   */
+  int node, num_threads;
+  char* message;
+  /**************************/
+  /* ^For use with CONCEPT^ */
+  /**************************/
+
   short is_allocated; /**< flag is set to true if allocated */
   //@}
 };
@@ -947,18 +960,18 @@ extern "C" {
 
 //@{
 
-#define _Mpc_over_m_ 3.085677581282e22  /**< conversion factor from meters to megaparsecs */
+#define _Mpc_over_m_ 3.0856775814913676e+22  /**< conversion factor from meters to megaparsecs */
 /* remark: CAMB uses 3.085678e22: good to know if you want to compare  with high accuracy */
 
-#define _Gyr_over_Mpc_ 3.06601394e2 /**< conversion factor from megaparsecs to gigayears
+#define _Gyr_over_Mpc_ 306.60139378555 /**< conversion factor from megaparsecs to gigayears
                                        (c=1 units, Julian years of 365.25 days) */
-#define _c_ 2.99792458e8            /**< c in m/s */
-#define _G_ 6.67428e-11             /**< Newton constant in m^3/Kg/s^2 */
-#define _eV_ 1.602176487e-19        /**< 1 eV expressed in J */
+#define _c_ 299792458.0            /**< c in m/s */
+#define _G_ 6.6743e-11             /**< Newton constant in m^3/Kg/s^2 */
+#define _eV_ 1.602176634e-19        /**< 1 eV expressed in J */
 
 /* parameters entering in Stefan-Boltzmann constant sigma_B */
 #define _k_B_ 1.3806504e-23
-#define _h_P_ 6.62606896e-34
+#define _h_P_ 6.62607015e-34
 /* remark: sigma_B = 2 pi^5 k_B^4 / (15h^3c^2) = 5.670400e-8
    = Stefan-Boltzmann constant in W/m^2/K^4 = Kg/K^4/s^3 */
 
