@@ -3486,6 +3486,15 @@ int perturbations_prepare_k_output(struct background * pba,
       class_store_columntitle(ppt->scalar_titles,"alpha_prime",ppt->gauge == synchronous);
       class_store_columntitle(ppt->scalar_titles,"einstein00",ppt->gauge == synchronous); // not only _smg
 
+      /************************/
+      /* For use with CONCEPT */
+      /************************/
+      /* Include H_T_prime (in N-body gauge) in perturbation output */
+      class_store_columntitle(ppt->scalar_titles, "H_T_prime", _TRUE_);
+      /**************************/
+      /* ^For use with CONCEPT^ */
+      /**************************/
+
       ppt->number_of_scalar_titles =
         get_number_of_titles(ppt->scalar_titles);
     }
