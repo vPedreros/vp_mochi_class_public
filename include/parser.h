@@ -3,7 +3,8 @@
 
 #include "common.h"
 
-#define _LINE_LENGTH_MAX_ 1024 /**< size of the string read in each line of the file (extra characters not taken into account) */
+
+#define _LINE_LENGTH_MAX_ 10000 /**< size of the string read in each line of the file (extra characters not taken into account) (vp: increased for CONCEPT)*/
 // #define _ARGUMENT_LENGTH_MAX_ 1024 /**< maximum size of each argument (name or value), including the final null character */
 #define _ARGUMENT_LENGTH_MAX_ 200000 /**< maximum size of each argument (name or value), including the final null character */
 

@@ -64,7 +64,7 @@ typedef char FileName[_FILENAMESIZE_+_BASEPATHSIZE_];
 
 #define _COLUMNWIDTH_ 24 /**< Must be at least _OUTPUTPRECISION_+8 for guaranteed fixed width columns */
 
-#define _MAXTITLESTRINGLENGTH_ 8000 /**< Maximum number of characters in title strings */
+#define _MAXTITLESTRINGLENGTH_ `100000` /**< Maximum number of characters in title strings (vp: increased for CONCEPT)*/
 
 #define _DELIMITER_ "\t" /**< character used for delimiting titles in the title strings */
 
