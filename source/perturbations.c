@@ -9421,6 +9421,38 @@ int perturbations_print_variables(double tau,
     class_store_double(dataptr, ppw->rho_plus_p_theta_fld, pba->has_fld, storeidx);
     class_store_double(dataptr, ppw->delta_p_fld, pba->has_fld, storeidx);
     //fprintf(ppw->perturbations_output_file,"\n");
+
+    /************************/
+    /* For use with CONCEPT */
+    /************************/
+    /* Include fld in perturbation output */
+    double w_fld, dw_over_da_fld, integral_fld, theta_fld;
+    if (pba->has_fld) {
+      class_call(background_w_fld(pba, a, &w_fld, &dw_over_da_fld, &integral_fld),
+        pba->error_message, ppt->error_message);
+      class_store_double(dataptr, ppw->delta_rho_fld/pvecback[pba->index_bg_rho_fld],
+        pba->has_fld, storeidx);
+      /* For w_fld = -1 (Lambda), we have theta = 0 */
+      if (w_fld == -1.) {
+        theta_fld = 0.;
+      }
+      else {
+        theta_fld = ppw->rho_plus_p_theta_fld/
+          ((1. + w_fld)*pvecback[pba->index_bg_rho_fld]);
+      }
+      class_store_double(dataptr, theta_fld, pba->has_fld, storeidx);
+      /**
+       * We choose to store cs2_fld = delta_p_fld/delta_rho_fld rather than
+       * simply delta_p_fld itself, as is done for massive neutrinos.
+       *
+       */
+      class_store_double(dataptr,
+        ppw->delta_p_fld/ppw->delta_rho_fld, pba->has_fld, storeidx);
+    }
+    /**************************/
+    /* ^For use with CONCEPT^ */
+    /**************************/
+
     if (pba->has_smg == _TRUE_) {
       class_call(
         perturbations_print_variables_smg(ppr, pba, ppt,  ppw, k, tau, dataptr, &storeidx),
