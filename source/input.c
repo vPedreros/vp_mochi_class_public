@@ -2718,6 +2718,15 @@ int input_read_parameters_species(struct file_content * pfc,
     /* Read */
     class_read_list_of_doubles_or_default("ksi_ncdm",pba->ksi_ncdm,pba->ksi_ncdm_default,N_ncdm);
 
+    /************************/
+    /* For use with CONCEPT */
+    /************************/
+    /* Read growth factor contribution of each ncdm species: */
+    class_read_list_of_doubles_or_default(
+      "growthfac_contrib_ncdm",pba->growthfac_contrib_ncdm,0.0,N_ncdm);
+    /**************************/
+    /* ^For use with CONCEPT^ */
+
     /** 5.g) Degeneracy of each ncdm species */
     /* Read */
     class_read_list_of_doubles_or_default("deg_ncdm",pba->deg_ncdm,pba->deg_ncdm_default,N_ncdm);
@@ -6008,6 +6017,15 @@ int input_default_params(struct background *pba,
   /** 5.f) ncdm chemical potential */
   pba->ksi_ncdm_default = 0.;
   pba->ksi_ncdm = NULL;
+
+  /************************/
+  /* For use with CONCEPT */
+  /************************/
+  pba->growthfac_contrib_ncdm = NULL;
+  /**************************/
+  /* ^For use with CONCEPT^ */
+  /**************************/
+
   /** 5.g) ncdm degeneracy parameter */
   pba->deg_ncdm_default = 1.;
   pba->deg_ncdm = NULL;

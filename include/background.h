@@ -109,6 +109,15 @@ struct background
                                             T_ncdm1/T_gamma; and its default value */
   double * ksi_ncdm, ksi_ncdm_default;   /**< list of 2nd parameters in p-s-d of non-cold relics: relative chemical potential
                                             ksi_ncdm1/T_ncdm1; and its default value */
+
+  /************************/
+  /* For use with CONCEPT */
+  /************************/
+  double * growthfac_contrib_ncdm;  /**< ncdm contribution factors for growth factors */
+  /**************************/
+  /* ^For use with CONCEPT^ */
+  /**************************/
+
   double * deg_ncdm, deg_ncdm_default;    /**< vector of degeneracy parameters in factor of p-s-d: 1 for one family of neutrinos
                                              (= one neutrino plus its anti-neutrino, total g*=1+1=2, so deg = 0.5 g*); and its
                                              default value */
@@ -598,6 +607,21 @@ struct background
   int index_bi_tau;     /**< {C} conformal time in Mpc */
   int index_bi_D;       /**< {C} scale independent growth factor D(a) for CDM perturbations. */
   int index_bi_D_prime; /**< {C} D satisfies \f$ [D''(\tau)=-aHD'(\tau)+3/2 a^2 \rho_M D(\tau) \f$ */
+
+  /************************/
+  /* For use with CONCEPT */
+  /************************/
+  int index_bi_D2;        /**< {C} second-order growth factor D2(a) */
+  int index_bi_D2_prime;  /**< {C} D2 satisfies \f$ D2''(\tau) = -aHD2'(\tau) +     3/2 a^2 \rho_M (D2(\tau) + D^2(\tau)) \f$ */
+  int index_bi_D3a;        /**< {C} third-order growth factor D3a(a) */
+  int index_bi_D3a_prime;  /**< {C} D3a satisfies \f$ D3a''(\tau) = -aHD3a'(\tau) + 3/2 a^2 \rho_M (D3a(\tau) + 2D^3(\tau)) \f$ */
+  int index_bi_D3b;        /**< {C} third-order growth factor D3b(a) */
+  int index_bi_D3b_prime;  /**< {C} D3b satisfies \f$ D3b''(\tau) = -aHD3b'(\tau) + 3/2 a^2 \rho_M (D3b(\tau) + 2D(\tau)D2(\tau) + 2D^3(\tau)) \f$ */
+  int index_bi_D3c;        /**< {C} third-order growth factor D3c(a) */
+  int index_bi_D3c_prime;  /**< {C} D3c satisfies \f$ D3c''(\tau) = -aHD3c'(\tau) + 3/2 a^2 \rho_M D^3(\tau) \f$ */
+  /**************************/
+  /* ^For use with CONCEPT^ */
+  /**************************/
 
   int bi_B_size;        /**< Number of {B} parameters */
   int bi_size;          /**< Number of {B}+{C} parameters */
