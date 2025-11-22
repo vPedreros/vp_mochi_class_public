@@ -8689,6 +8689,17 @@ int perturbations_sources(
     /* x_smg */
     if(ppt->has_source_x_smg == _TRUE_) {
       _set_source_(ppt->index_tp_x_smg) = pvecmetric[ppw->index_mt_x_smg];
+      
+      /************************/
+      /* For use with CONCEPT */
+      /************************/
+      //vp: added for delta, theta and smg
+      _set_source_(ppt->index_tp_delta_smg) = pvecmetric[ppw->index_mt_delta_smg];
+      _set_source_(ppt->index_tp_theta_smg) = pvecmetric[ppw->index_mt_theta_smg];
+      _set_source_(ppt->index_tp_shear_smg) = pvecmetric[ppw->index_mt_shear_smg];
+      /************************/
+      /*^For use with CONCEPT^*/
+      /************************/
     }
 
     /* delta_dr */

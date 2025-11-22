@@ -233,6 +233,7 @@ cdef extern from "class.h":
         short has_source_delta_idr
         short has_source_delta_dcdm
         short has_source_delta_fld
+        short has_source_delta_smg
         short has_source_delta_scf
         short has_source_delta_dr
         short has_source_delta_ur
@@ -247,6 +248,7 @@ cdef extern from "class.h":
         short has_source_theta_idr
         short has_source_theta_dcdm
         short has_source_theta_fld
+        short has_source_theta_smg
         short has_source_theta_scf
         short has_source_theta_dr
         short has_source_theta_ur
@@ -262,6 +264,8 @@ cdef extern from "class.h":
         short has_source_H_T_Nb_prime
         short has_source_k2gamma_Nb
 
+        short has_source_shear_smg
+
         int index_tp_t0
         int index_tp_t1
         int index_tp_t2
@@ -275,6 +279,7 @@ cdef extern from "class.h":
         int index_tp_delta_idm
         int index_tp_delta_dcdm
         int index_tp_delta_fld
+        int index_tp_delta_smg
         int index_tp_delta_scf
         int index_tp_delta_dr
         int index_tp_delta_ur
@@ -289,6 +294,7 @@ cdef extern from "class.h":
         int index_tp_theta_cdm
         int index_tp_theta_dcdm
         int index_tp_theta_fld
+        int index_tp_theta_smg
         int index_tp_theta_scf
         int index_tp_theta_ur
         int index_tp_theta_idr
@@ -307,6 +313,7 @@ cdef extern from "class.h":
         int index_tp_H_T_Nb_prime
         int index_tp_k2gamma_Nb
 
+        int index_tp_shear_smg
 
         double *** sources
         double * tau_sampling
