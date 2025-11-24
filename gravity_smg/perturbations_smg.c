@@ -933,6 +933,7 @@ int perturbations_einstein_scalar_smg(
   else {
     if (pba->gravity_model_smg == stable_params && qs_array_smg[ppw->approx[ppw->index_ap_qs_smg]] == _TRUE_) {  
       /* MGCAMB eq. 26 -- adjusted to CLASS convention 3*rho_class = 8*pi*G*rho_physical */
+      printf("entered mgcamb qsa for eta_prime.\n");
       ppw->pvecmetric[ppw->index_mt_eta_prime] = 0.5*a2/(9./2.*a2*mu*gamma*(ppw->pvecback[pba->index_bg_rho_tot_wo_smg] + ppw->pvecback[pba->index_bg_p_tot_wo_smg]) + k2)
           * (3.*ppw->rho_plus_p_theta*mu*gamma*(1. + 3./k2*(pow(a*H,2.) - Hconf_prime)) + 3.*rho_Delta*(a*H*mu*(gamma - 1.) - mu_prime*gamma - mu*gamma_prime)
           + 9.*mu*(1. - gamma)*ppw->rho_plus_p_shear_prime + k2*alpha*(3.*mu*gamma*(ppw->pvecback[pba->index_bg_rho_tot_wo_smg] + ppw->pvecback[pba->index_bg_p_tot_wo_smg])
@@ -957,7 +958,7 @@ int perturbations_einstein_scalar_smg(
       /************************/
       /* For use with CONCEPT */
       /************************/
-      rho_plus_p_theta_smg = ppw->rho_plus_p_theta*(1-M2)/M2 -2*k2/3/a*c0*H*res*ppw->pvecmetric[ppw->index_mt_x_smg] - 0.5*cB*res*ppw->pvecmetric[ppw->index_mt_x_prime_smg];
+      rho_plus_p_theta_smg = ppw->rho_plus_p_theta*(1-M2)/M2 -2*k2/3/a*(c0*H*res*ppw->pvecmetric[ppw->index_mt_x_smg] - cB*res*ppw->pvecmetric[ppw->index_mt_x_prime_smg]);
       ppw->pvecmetric[ppw->index_mt_theta_smg] = rho_plus_p_theta_smg/(ppw->pvecback[pba->index_bg_rho_smg] + ppw->pvecback[pba->index_bg_p_smg]);
       /**************************/
       /* ^For use with CONCEPT^ */
@@ -968,15 +969,7 @@ int perturbations_einstein_scalar_smg(
   if (ppw->approx[ppw->index_ap_gr_smg] == (int)gr_smg_off) {
     if (pba->gravity_model_smg == stable_params && qs_array_smg[ppw->approx[ppw->index_ap_qs_smg]] == _TRUE_) {  
       ppw->pvecmetric[ppw->index_mt_h_prime] = 2.*k2*alpha - 6.*ppw->pvecmetric[ppw->index_mt_eta_prime];
-      /************************/
-      /* For use with CONCEPT */
-      /************************/
-      // Todo:
-      // rho_plus_p_theta_smg = 0.;
-      // ppw->pvecmetric[ppw->index_mt_theta_smg] = 0.;
-      /**************************/
-      /* ^For use with CONCEPT^ */
-      /**************************/
+
     }
   }
 
@@ -1004,15 +997,7 @@ int perturbations_einstein_scalar_smg(
       - 2. * a_prime_over_a * ppw->pvecmetric[ppw->index_mt_h_prime]
       + 2. * k2 * ppw->pvecmetric[ppw->index_mt_eta]
       - 9. * pow(a,2) * ppw->delta_p;
-      /************************/
-      /* For use with CONCEPT */
-      /************************/
-      // Todo:
-      // rho_plus_p_theta_smg = 0.;
-      // ppw->pvecmetric[ppw->index_mt_theta_smg] = 0.;
-      /**************************/
-      /* ^For use with CONCEPT^ */
-      /**************************/
+
   }
   else {
     ppw->pvecmetric[ppw->index_mt_h_prime_prime] =
@@ -1030,14 +1015,7 @@ int perturbations_einstein_scalar_smg(
         + c7*k2 + c6*pow(a*H,2)
       )*ppw->pvecmetric[ppw->index_mt_x_smg]
     )/cD;
-      /************************/
-      /* For use with CONCEPT */
-      /************************/
-      // rho_plus_p_theta_smg = ;
-      // ppw->pvecmetric[ppw->index_mt_theta_smg] = 0.;
-      /**************************/
-      /* ^For use with CONCEPT^ */
-      /**************************/
+
   }
 
   /* This corrects the third equation using the Einstein 00. It has to be
@@ -1104,6 +1082,7 @@ int perturbations_einstein_scalar_smg(
   else {
     if(pba->gravity_model_smg == stable_params && qs_array_smg[ppw->approx[ppw->index_ap_qs_smg]] == _TRUE_){
       // MGCAMB QSA alpha' = phi + psi - eta
+      printf("entered mgcamb qsa for alpha_prime.\n");
       ppw->pvecmetric[ppw->index_mt_alpha_prime] = 
        -1.5*a2/k2*mu*(1+gamma)*rho_Delta 
        - 4.5*a2/k2*mu*gamma*ppw->rho_plus_p_shear 
