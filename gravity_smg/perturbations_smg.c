@@ -943,8 +943,8 @@ int perturbations_einstein_scalar_smg(
       /************************/
       /* For use with CONCEPT */
       /************************/
-      // Todo:
-      // rho_plus_p_theta_smg = 0.;
+      Todo:
+      rho_plus_p_theta_smg = ppw->rho_plus_p_theta*(mu*gamma -1) + k2/3/(k2-3*a*(pow(a*H,2)-Hconf_prime))*(3*rho_Delta*(a*H*mu*(gamma-1)-mu_prime*gamma-mu*gamma_prime) + 9.*mu*(1. - gamma)*ppw->rho_plus_p_shear_prime + 9.*a*H*mu*(gamma - 1.)*ppw->rho_plus_p_shear_eos_factor - 9.*ppw->rho_plus_p_shear*(mu_prime*(gamma - 1.) + gamma_prime*mu)+ 9.*mu*(1. - gamma)*ppw->rho_shear_w_prime + 3*k2*alpha*(ppw->pvecback[pba->index_bg_rho_tot_wo_smg] + ppw->pvecback[pba->index_bg_p_tot_wo_smg])*(mu*gamma-1));
       // ppw->pvecmetric[ppw->index_mt_theta_smg] = 0.;
       /**************************/
       /* ^For use with CONCEPT^ */
